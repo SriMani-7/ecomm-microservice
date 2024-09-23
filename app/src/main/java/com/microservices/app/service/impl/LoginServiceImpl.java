@@ -3,8 +3,6 @@ package com.microservices.app.service.impl;
 import java.net.URI;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +16,10 @@ import com.microservices.app.service.LoginService;
 public class LoginServiceImpl implements LoginService {
 
 	private final DiscoveryClient discoveryClient;
-	private final Logger logger;
 	private final RestTemplate template;
 
 	public LoginServiceImpl(DiscoveryClient discoveryClient) {
 		this.discoveryClient = discoveryClient;
-		logger = LogManager.getLogger();
 		template = new RestTemplate();
 	}
 
@@ -33,9 +29,9 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public Map authenticateUser(String email, String password) {
+	public LoginResponse authenticateUser(String email, String password) {
 		var request = Map.of("email", email, "password", password);
-		return template.postForObject(getUri() + "/auth/login", request, Map.class);
+		return template.postForObject(getUri() + "/auth/login", request, LoginResponse.class);
 	}
 
 	@Override

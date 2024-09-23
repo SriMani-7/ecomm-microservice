@@ -1,12 +1,12 @@
 package com.microservices.app.service;
 
-import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
+
+import com.microservices.app.dto.LoginResponse;
 
 public interface LoginService {
 
-	Map authenticateUser(String email, String password);
+	LoginResponse authenticateUser(String email, String password);
 
 	ResponseEntity<String> sendOtp(String email, String password);
 
