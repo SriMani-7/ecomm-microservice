@@ -3,13 +3,17 @@ package com.microservices.app.service;
 import org.springframework.http.ResponseEntity;
 
 import com.microservices.app.dto.LoginResponse;
+import com.microservices.app.dto.OTPVerifyRequest;
+import com.microservices.app.dto.RegisterRequest;
 
 public interface LoginService {
 
 	LoginResponse authenticateUser(String email, String password);
 
-	ResponseEntity<String> sendOtp(String email, String password);
+	String register(RegisterRequest request);
 
-	ResponseEntity<String> verifyOtp(String email, String otp);
+	ResponseEntity<String> verifyEmail(String email);
+
+	ResponseEntity<String> verifyEmail(OTPVerifyRequest otpVerifyRequest);
 
 }
