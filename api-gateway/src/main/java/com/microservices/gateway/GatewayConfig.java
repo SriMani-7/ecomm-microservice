@@ -16,6 +16,6 @@ public class GatewayConfig {
 	@Bean
 	public RouteLocator routes(RouteLocatorBuilder builder) {
 		return builder.routes().route("admin-service", t -> t.path("/admin/*").uri("lb://admin"))
-				.route(r -> r.path("/auth/*").uri("lb://authentication")).build();
+				.route(r -> r.path("/auth/**").uri("lb://authentication")).build();
 	}
 }
