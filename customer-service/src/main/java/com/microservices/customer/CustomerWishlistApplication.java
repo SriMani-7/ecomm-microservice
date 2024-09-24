@@ -1,4 +1,4 @@
-package com.microservices.customer.wishlist;
+package com.microservices.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

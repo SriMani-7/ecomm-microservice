@@ -1,4 +1,4 @@
-package com.microservices.customer.wishlist.entity;
+package com.microservices.customer.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

@@ -1,4 +1,4 @@
-package com.microservices.customer.wishlist.entity;
+package com.microservices.customer.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
