@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.microservices.authentication.dto.UserResponse;
+import com.microservices.authentication.dto.UserResponseProjection;
 import com.microservices.authentication.entity.MyUser;
 import com.microservices.authentication.entity.MyUser.UserStatus;
 import com.microservices.authentication.service.MyUserService;
@@ -27,7 +29,7 @@ public class UsersController {
 	private MyUserService userService;
 
 	@GetMapping
-	public ResponseEntity<List<MyUser>> getUserAndView(
+	public ResponseEntity<List<UserResponseProjection>> getUserAndView(
 			@SessionAttribute(required = false) @RequestParam(required = false) String role) {
 
 		if (role == null || role.isBlank()) {
