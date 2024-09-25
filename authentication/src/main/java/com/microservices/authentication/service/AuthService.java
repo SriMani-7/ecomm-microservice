@@ -1,18 +1,15 @@
 package com.microservices.authentication.service;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.microservices.authentication.Repo.UserRepo;
-import com.microservices.authentication.dto.LoginRequest;
-import com.microservices.authentication.dto.LoginResponse;
 import com.microservices.authentication.dto.RegisterRequest;
 import com.microservices.authentication.entity.MyUser;
+import com.zip.util.JwtUtil;
 
 import lombok.AllArgsConstructor;
 
@@ -23,9 +20,7 @@ public class AuthService {
 	private UserRepo userRepository;
 	private AuthenticationManager authenticationManager;
 	private PasswordEncoder passwordEncoder;
-	private JwtService jwtService;
-
-
+	private JwtUtil jwtService;
 
 //	public ResponseEntity<String> login(LoginRequest request) {
 //		try {
