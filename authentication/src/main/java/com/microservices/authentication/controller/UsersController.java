@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.microservices.authentication.dto.UserResponse;
 import com.microservices.authentication.dto.UserResponseProjection;
 import com.microservices.authentication.entity.MyUser;
 import com.microservices.authentication.entity.MyUser.UserStatus;
@@ -39,12 +38,19 @@ public class UsersController {
 		}
 	}
 
-	@PutMapping("/status")
-	public String putUserStatus(@RequestParam long userId, @RequestParam UserStatus status) {
+	 
 
-		userService.updateUserStatus(userId, status);
-
-		return "User status updated successfully";
-	}
+	    // This method handles PUT requests to update a user's status.
+	    @PutMapping("/admin/users/status")
+	    public String putUserStatus(@RequestParam long userId, @RequestParam UserStatus status) {
+	        try {
+	            // Call the service layer to update the user status
+	            userService.updateUserStatus(userId, status);
+	            return "User status updated successfully.";
+	        } catch (Exception e) {
+	            // Handle any errors that occur during the update process
+	            return "Failed to update user status: " + e.getMessage();
+	        }
+	    }
 
 }
