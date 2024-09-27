@@ -14,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.microservices.authentication.Repo.UserRepo;
 import com.microservices.authentication.dto.LoginResponse;
-import com.microservices.authentication.dto.UserDTO;
 import com.zip.util.JwtUtil;
 
 @Service
@@ -42,11 +41,6 @@ public class LoginServiceImpl implements LoginService {
 	private Map<String, Long> otpExpiry = new ConcurrentHashMap<>();
 	private Map<String, Boolean> otpVerified = new ConcurrentHashMap<>(); // To store OTP verification status
 	private static final long OTP_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes
-
-	@Override
-	public String registerUser(UserDTO user) {
-		return "";
-	}
 
 	@Override
 	public LoginResponse login(String email, String password) {
