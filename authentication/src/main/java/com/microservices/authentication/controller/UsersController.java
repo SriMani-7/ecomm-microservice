@@ -56,10 +56,10 @@ public class UsersController {
 	    @GetMapping("/reviewRequest")
 	    public ResponseEntity<?> retailersUnderReview() {
 	        List<retailerDto> retailers = userService.retailersUnderReview();
-	        if (retailers == null || retailers.isEmpty()) {
+	  /*      if (retailers == null || retailers.isEmpty()) {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                                 .body("No retailers under review");
-	        }
+	                                 .body("No retailers under review");*/
+	        //}
 	        return ResponseEntity.ok(retailers);
 	    }
 
