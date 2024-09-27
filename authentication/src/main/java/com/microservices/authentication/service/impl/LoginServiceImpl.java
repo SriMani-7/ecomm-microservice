@@ -1,4 +1,4 @@
-package com.microservices.authentication.service;
+package com.microservices.authentication.service.impl;
 
 import java.util.Map;
 import java.util.Random;
@@ -14,7 +14,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.microservices.authentication.Repo.UserRepo;
 import com.microservices.authentication.dto.LoginResponse;
-import com.microservices.authentication.dto.UserDTO;
+import com.microservices.authentication.service.EmailService;
+import com.microservices.authentication.service.LoginService;
+import com.microservices.authentication.service.UserService;
+import com.zip.util.JwtUtil;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -29,20 +32,18 @@ public class LoginServiceImpl implements LoginService {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	private JwtService jwtService;
+	private JwtUtil jwtService;
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private UserService userService;
 
 	private Map<String, String> otpStore = new ConcurrentHashMap<>();
 	private Map<String, Long> otpExpiry = new ConcurrentHashMap<>();
 	private Map<String, Boolean> otpVerified = new ConcurrentHashMap<>(); // To store OTP verification status
 	private static final long OTP_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes
-
-	@Override
-	public String registerUser(UserDTO user) {
-		return "";
-	}
 
 	@Override
 	public LoginResponse login(String email, String password) {
@@ -51,7 +52,8 @@ public class LoginServiceImpl implements LoginService {
 			var auth = authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), password));
 			var role = auth.getAuthorities().iterator().next().getAuthority();
-			return new LoginResponse(jwtService.generateToken(auth.getName()), role);
+
+			return new LoginResponse(jwtService.generateToken(userService.loadUserByUsername(auth.getName())), role);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

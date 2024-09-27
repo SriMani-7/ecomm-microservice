@@ -1,15 +1,22 @@
 package com.microservices.app.service;
 
-import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
+
+import com.microservices.app.dto.LoginResponse;
+import com.microservices.app.dto.OTPVerifyRequest;
+import com.microservices.app.dto.RegisterRequest;
+import com.microservices.app.dto.RetailerRegister;
 
 public interface LoginService {
 
-	Map authenticateUser(String email, String password);
+	LoginResponse authenticateUser(String email, String password);
 
-	ResponseEntity<String> sendOtp(String email, String password);
+	String register(RegisterRequest request);
 
-	ResponseEntity<String> verifyOtp(String email, String otp);
+	ResponseEntity<String> verifyEmail(String email);
+
+	ResponseEntity<String> verifyEmail(OTPVerifyRequest otpVerifyRequest);
+
+	String registerRetailer(RetailerRegister request);
 
 }
