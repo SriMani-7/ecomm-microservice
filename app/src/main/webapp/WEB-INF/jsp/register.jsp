@@ -62,13 +62,6 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
-            <div class="form-group">
-                <label for="role">Role</label>
-                <select class="form-control" name="role">
-                    <option value="CUSTOMER">Customer</option>
-                    <option value="RETAILER">Retailer</option>
-                </select>
-            </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
 
