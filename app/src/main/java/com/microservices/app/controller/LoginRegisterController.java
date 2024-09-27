@@ -16,6 +16,7 @@ import org.springframework.web.client.HttpServerErrorException;
 
 import com.microservices.app.dto.OTPVerifyRequest;
 import com.microservices.app.dto.RegisterRequest;
+import com.microservices.app.dto.RetailerRegister;
 import com.microservices.app.service.LoginService;
 
 import jakarta.servlet.http.HttpSession;
@@ -68,6 +69,23 @@ public class LoginRegisterController {
 	@GetMapping("/register")
 	public String showRegistrationForm() {
 		return "register"; // return the registration JSP page
+	}
+
+	@GetMapping("/register-retailer")
+	public String showRetailerRegistrationForm() {
+		return "register-retailer"; // return the registration JSP page
+	}
+
+	@PostMapping("/register-retailer")
+	public String registerRetailer(@ModelAttribute RetailerRegister request, Model model) {
+		try {
+			String message = service.registerRetailer(request);
+			model.addAttribute("successMessage", message);
+			return "redirect:/login"; // redirect to login page on success
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "register-retailer"; // return to registration page on error
+		}
 	}
 
 	@PostMapping("/register")

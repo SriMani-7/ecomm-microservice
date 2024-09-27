@@ -68,6 +68,7 @@ public class RegistrationService {
 		return "Customer registered successfully!";
 	}
 
+	@Transactional
 	public String registerRetailer(RetailerRegister request) {
 
 		checkOTPVerfifed(request.getEmail());
@@ -81,8 +82,8 @@ public class RegistrationService {
 		retailer.setContactNo(request.getContactNo());
 		retailer.setPassword(passwordEncoder.encode(request.getPassword()));
 		retailer.setCity(request.getCity());
-		retailer.setStatus(MyUser.UserStatus.ACTIVE);
-		retailer.setUserType("CUSTOMER");
+		retailer.setStatus(MyUser.UserStatus.UNDER_REVIEW);
+		retailer.setUserType("RETAILER");
 		retailer.setAge(request.getAge());
 		retailer.setAddress(request.getAddress());
 		retailer.setGSTIN(request.getGSTIN());

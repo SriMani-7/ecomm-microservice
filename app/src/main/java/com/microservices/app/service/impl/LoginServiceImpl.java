@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.microservices.app.dto.LoginResponse;
 import com.microservices.app.dto.OTPVerifyRequest;
 import com.microservices.app.dto.RegisterRequest;
+import com.microservices.app.dto.RetailerRegister;
 import com.microservices.app.service.LoginService;
 
 @Service
@@ -63,6 +64,11 @@ public class LoginServiceImpl implements LoginService {
 		} catch (HttpClientErrorException ex) {
 			return ResponseEntity.status(ex.getStatusCode()).body(ex.getResponseBodyAsString());
 		}
+	}
+
+	@Override
+	public String registerRetailer(RetailerRegister request) {
+		return template.postForObject(getUri() + "/auth/register-retailer", request, String.class);
 	}
 
 }
