@@ -1,4 +1,4 @@
-package com.microservices.authentication.service;
+package com.microservices.authentication.service.impl;
 
 import java.util.Map;
 import java.util.Random;
@@ -14,6 +14,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.microservices.authentication.Repo.UserRepo;
 import com.microservices.authentication.dto.LoginResponse;
+import com.microservices.authentication.service.EmailService;
+import com.microservices.authentication.service.LoginService;
+import com.microservices.authentication.service.UserService;
 import com.zip.util.JwtUtil;
 
 @Service
