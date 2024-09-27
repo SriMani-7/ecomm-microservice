@@ -1,7 +1,5 @@
 package com.microservices.authentication.entity;
 
-
-
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -60,6 +58,6 @@ public class MyUser {
 	private UserStatus status;
 
 	public enum UserStatus {
-		UNDER_REVIEW, ACTIVE,DEACTIVATED,REJECTED
+		UNDER_REVIEW, SUSPENDED, ACTIVE
 	}
 }
