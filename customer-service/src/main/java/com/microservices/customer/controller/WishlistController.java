@@ -13,32 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservices.customer.entity.Product;
+import com.microservices.customer.dto.WishlistResponse;
 import com.microservices.customer.service.CustomerService;
 
 @RestController
-@RequestMapping("/wishlist")
+@RequestMapping("/customers/{userId}/wishlist")
 public class WishlistController {
 
 	@Autowired
 	private CustomerService service;
 
-	@GetMapping("/{userId}") // http://localhost:8080/wishlist/105
-	public ResponseEntity<List<Product>> wishlistView(@PathVariable Long userId) {
-		List<Product> items = service.getItems(userId); // Assuming getItems returns List<Product>
-		return ResponseEntity.ok(items);
+	@GetMapping
+	public List<WishlistResponse> wishlistView(@PathVariable Long userId) {
+		return service.getWishlistedItems(userId);
 	}
 
-	@PostMapping("/add") // http://localhost:8080/wishlist/add?userId=101&productId=1
-	public ResponseEntity<String> addProduct(@RequestParam Long userId, @RequestParam Long productId) {
-		// Assuming the user must be authenticated (you might need to check user
-		// validity in your service)
+	@PostMapping
+	public ResponseEntity<String> addProduct(@PathVariable Long userId, @RequestParam Long productId) {
 		service.addWishlistItem(userId, productId);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Product added to wishlist");
 	}
 
-	@DeleteMapping("/remove") // http://localhost:8080/wishlist/remove?userId=101&productId=1
-	public ResponseEntity<String> deleteProduct(@RequestParam Long userId, @RequestParam Long productId) {
+	@DeleteMapping
+	public ResponseEntity<String> deleteProduct(@PathVariable Long userId, @RequestParam Long productId) {
 		service.removeWishlistItem(userId, productId);
 		return ResponseEntity.ok("Product removed from wishlist");
 	}
