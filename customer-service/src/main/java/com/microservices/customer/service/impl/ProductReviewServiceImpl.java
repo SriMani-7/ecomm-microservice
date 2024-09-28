@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.microservices.customer.dao.CustomerDAO;
 import com.microservices.customer.dao.ProductDAo;
 import com.microservices.customer.dao.ProductReviewDAO;
+import com.microservices.customer.dto.ProductReviewResponse;
 import com.microservices.customer.entity.Customer;
 import com.microservices.customer.entity.Product;
 import com.microservices.customer.entity.ProductReview;
@@ -25,13 +26,9 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 	@Autowired
 	private ProductDAo productDAO; // Assuming you have a DAO for Product
 
-	public List<ProductReview> getReviewsByProductId(long productId) {
-		return productReviewDAO.findByProduct_Id(productId);
-	}
-
 	@Override
-	public List<ProductReview> getReviewsByCustomerId(long userId) {
-		return productReviewDAO.findByCustomer_UserId(userId);
+	public List<ProductReviewResponse> getReviewsByCustomerId(long userId) {
+		return productReviewDAO.findReviewsByCustomerId(userId);
 	}
 
 	@Override

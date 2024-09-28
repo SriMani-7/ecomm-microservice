@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.microservices.customer.entity.WishList;
 
 public interface WishlistDAO extends JpaRepository<WishList, Long> {
-	@Query("SELECT wl FROM WishList wl WHERE wl.customer.userId = :userId")
+	@Query("SELECT wl FROM WishList wl WHERE wl.customer.id = :userId")
 	List<WishList> findByCustomerUserId(@Param("userId") Long userId);
 
 }

@@ -5,10 +5,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table
-public class Customer extends MyUser {
+@Getter
+@Setter
+public class Retailer extends MyUser {
 
 }
