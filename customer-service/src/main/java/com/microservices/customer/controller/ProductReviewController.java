@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microservices.customer.dto.ProductReviewRequest;
@@ -32,7 +31,7 @@ public class ProductReviewController {
 	}
 
 	@PostMapping
-	public ResponseEntity<String> createReview(@RequestParam Long userId, @RequestBody ProductReviewRequest request) {
+	public ResponseEntity<String> createReview(@PathVariable Long userId, @RequestBody ProductReviewRequest request) {
 		productReviewService.saveProductReview(userId, request.getProductId(), request.getReviewContent(),
 				request.getRating());
 		return ResponseEntity.status(HttpStatus.CREATED).body("Review created successfully");
