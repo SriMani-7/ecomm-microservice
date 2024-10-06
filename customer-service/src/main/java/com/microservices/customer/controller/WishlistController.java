@@ -36,6 +36,7 @@ public class WishlistController {
 
 	@DeleteMapping
 	public ResponseEntity<String> deleteProduct(@PathVariable Long userId, @RequestParam Long productId) {
+		System.out.print(userId+"from service");
 		service.removeWishlistItem(userId, productId);
 		return ResponseEntity.ok("Product removed from wishlist");
 	}
