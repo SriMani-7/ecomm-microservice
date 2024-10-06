@@ -127,9 +127,7 @@ body {
 											<h6>Total Amount</h6>
 											<h4 class="text-primary mb-4">$${order.totalAmount}</h4>
 
-											<button class="btn btn-invoice w-100"
-												onclick="window.open('printInvoice?orderId=${order.orderId}', '_blank')">Print
-												Invoice</button>
+											<a href="/orders/${order.orderId}/invoice" class="btn btn-invoice w-100">Print Invoice</a>
 										</div>
 									</div>
 								</div>
