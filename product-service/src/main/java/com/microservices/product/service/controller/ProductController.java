@@ -2,6 +2,7 @@ package com.microservices.product.service.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +26,8 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-
+	
+	Logger log = Logger.getLogger(ProductController.class);
 	@GetMapping
 	public List<Product> productsView(@RequestParam(required = false) String category,
 			@RequestParam(required = false) String search) {
@@ -50,17 +52,20 @@ public class ProductController {
 
 	@PostMapping("/addproduct/{retailerId}")
 	public String addProduct(@PathVariable long retailerId, @RequestBody ProductForm form) {
+		log.info("addProduct called in product-service");
 		return productService.addProduct(retailerId, form);
 	}
 
 	@PutMapping("/updateProduct/{retailerId}/{productId}")
 	public String updateProduct(@PathVariable long retailerId, @PathVariable Long productId,
 			@RequestBody ProductForm form) {
+		log.info("Product Upadate Called in Product-Service");
 		return productService.updateProduct(retailerId, productId, form);
 	}
 
 	@DeleteMapping("/deleteProduct/{retailerId}/{productId}")
 	public String deleteProduct(@PathVariable long retailerId, @PathVariable Long productId) {
+		log.info("Product Delete Called in Product-Service");
 		return productService.deleteProduct(retailerId, productId);
 	}
 
@@ -72,7 +77,11 @@ public class ProductController {
 
 	@GetMapping("/getAllProducts/{retailerId}")
 	public List<Product> getAllProducts(@PathVariable Long retailerId) {
+		log.info("Product GetAllProductsMethod Called in Product-Service");
 		return productService.getAllProducts(retailerId);
+	}
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
 	}
 
 }
