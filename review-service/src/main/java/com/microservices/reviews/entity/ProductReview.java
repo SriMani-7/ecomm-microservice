@@ -1,9 +1,11 @@
-package com.microservices.customer.entity;
+package com.microservices.reviews.entity;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,10 +28,11 @@ public class ProductReview {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Use IDENTITY for auto-increment
 	private long id;
 
-	@ManyToOne
 	@JoinColumn(nullable = false)
+	@ManyToOne
 	private Customer customer;
 
+	@JsonIgnore
 	@JoinColumn(nullable = false)
 	@ManyToOne
 	private Product product;

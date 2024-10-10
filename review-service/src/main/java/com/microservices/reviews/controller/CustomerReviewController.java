@@ -1,4 +1,4 @@
-package com.microservices.customer.controller;
+package com.microservices.reviews.controller;
 
 import java.util.List;
 
@@ -13,33 +13,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservices.customer.dto.ProductReviewRequest;
-import com.microservices.customer.dto.ProductReviewResponse;
-import com.microservices.customer.service.ProductReviewService;
+import com.microservices.reviews.dto.ProductReviewRequest;
+import com.microservices.reviews.dto.ProductReviewResponse;
+import com.microservices.reviews.service.ProductReviewService;
 
 @RestController
 @RequestMapping("/customers/{userId}/reviews")
-public class ProductReviewController {
+public class CustomerReviewController {
 
 	@Autowired
-	private ProductReviewService productReviewService;
+	private ProductReviewService service;
 
 	@GetMapping
 	public ResponseEntity<List<ProductReviewResponse>> listReviewsByCustomer(@PathVariable Long userId) {
-		var reviews = productReviewService.getReviewsByCustomerId(userId);
+		var reviews = service.getReviewsByCustomerId(userId);
 		return ResponseEntity.ok(reviews);
 	}
 
 	@PostMapping
 	public ResponseEntity<String> createReview(@PathVariable Long userId, @RequestBody ProductReviewRequest request) {
-		productReviewService.saveProductReview(userId, request.getProductId(), request.getReviewContent(),
-				request.getRating());
+		service.saveProductReview(userId, request.getProductId(), request.getReviewContent(), request.getRating());
 		return ResponseEntity.status(HttpStatus.CREATED).body("Review created successfully");
 	}
 
 	@DeleteMapping("/{reviewId}")
 	public ResponseEntity<String> deleteReview(@PathVariable long reviewId) {
-		productReviewService.deleteReview(reviewId);
+		service.deleteReview(reviewId);
 		return ResponseEntity.ok("Review deleted successfully");
 	}
 }
