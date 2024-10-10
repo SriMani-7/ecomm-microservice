@@ -126,8 +126,10 @@ body {
 											<p>${order.paymentType}</p>
 											<h6>Total Amount</h6>
 											<h4 class="text-primary mb-4">$${order.totalAmount}</h4>
-
-											<a href="/orders/${order.orderId}/invoice" class="btn btn-invoice w-100">Print Invoice</a>
+<!-- Show 'Print Invoice' button only if the order is delivered -->
+                                            <c:if test="${item.orderStatus == 'DELIVERED'}">
+                                                <a href="/orders/${order.orderId}/invoice" class="btn btn-invoice w-100">Print Invoice</a>
+                                            </c:if>
 										</div>
 									</div>
 								</div>
@@ -147,3 +149,4 @@ body {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
