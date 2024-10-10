@@ -1,4 +1,4 @@
-package com.microservices.customer.dto;
+package com.microservices.reviews.dto;
 
 import lombok.Data;
 
